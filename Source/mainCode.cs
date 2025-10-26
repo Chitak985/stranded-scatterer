@@ -1,0 +1,40 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using UnityEngine;
+
+namespace StrandedScatterer
+{
+	[KSPAddon(KSPAddon.Startup.EveryScene, false)]
+	public class StrandedScatterer: MonoBehaviour
+	{
+    public Camera farCamera, scaledSpaceCamera, nearCamera;
+
+    void Init()
+		{
+			SetupMainCameras ();
+
+      scaledSpaceCamera.gameObject.AddComponent<ParticleSystem>();
+      farCamera.gameObject.AddComponent<ParticleSystem>();
+      nearCamera.gameObject.AddComponent<ParticleSystem>();
+
+      var camera1 = scaledSpaceCamera.gameObject.GetComponent<ParticleSystem>().main;
+      var camera2 = farCamera.gameObject.GetComponent<ParticleSystem>().main;
+      var camera3 = nearCamera.gameObject.GetComponent<ParticleSystem>().main;
+
+      camera1.startLifetime = 10f;
+
+      scaledSpaceCamera.gameObject.GetComponent<ParticleSystem>().Play();
+      farCamera.gameObject.GetComponent<ParticleSystem>().Play();
+      nearCamera.gameObject.GetComponent<ParticleSystem>().Play();
+    }
+
+    void SetupCameras()
+    {
+      scaledSpaceCamera = Camera.allCameras.FirstOrDefault (_cam => _cam.name == "Camera ScaledSpace");
+			farCamera = Camera.allCameras.FirstOrDefault (_cam => _cam.name == "Camera 01");
+			nearCamera = Camera.allCameras.FirstOrDefault (_cam => _cam.name == "Camera 00");
+    }
+  }
+}
