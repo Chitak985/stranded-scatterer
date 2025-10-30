@@ -13,7 +13,9 @@ namespace StrandedScatterer
 	
 	    void Init()
 		{
-			SetupMainCameras ();
+			scaledSpaceCamera = Camera.allCameras.FirstOrDefault (_cam => _cam.name == "Camera ScaledSpace");
+			farCamera = Camera.allCameras.FirstOrDefault (_cam => _cam.name == "Camera 01");
+			nearCamera = Camera.allCameras.FirstOrDefault (_cam => _cam.name == "Camera 00");
 	
 	    	scaledSpaceCamera.gameObject.AddComponent<ParticleSystem>();
 	      	farCamera.gameObject.AddComponent<ParticleSystem>();
@@ -30,17 +32,14 @@ namespace StrandedScatterer
 	      	camera1.startLifetime = 10.0f;
 			camera2.startLifetime = 10.0f;
 			camera3.startLifetime = 10.0f;
+
+			camera1.startSize = 10.0f;
+			camera2.startSize = 10.0f;
+			camera3.startSize = 10.0f;
 	
 	      	scaledSpaceCamera.gameObject.GetComponent<ParticleSystem>().Play();
 	      	farCamera.gameObject.GetComponent<ParticleSystem>().Play();
 	      	nearCamera.gameObject.GetComponent<ParticleSystem>().Play();
-	    }
-	
-	    void SetupCameras()
-	    {
-	      	scaledSpaceCamera = Camera.allCameras.FirstOrDefault (_cam => _cam.name == "Camera ScaledSpace");
-			farCamera = Camera.allCameras.FirstOrDefault (_cam => _cam.name == "Camera 01");
-			nearCamera = Camera.allCameras.FirstOrDefault (_cam => _cam.name == "Camera 00");
 	    }
   	}
 }
