@@ -11,7 +11,7 @@ namespace StrandedScatterer
 	{
 	    public Camera farCamera, scaledSpaceCamera, nearCamera;
 	
-	    void Init()
+	    void Start()
 		{
 			scaledSpaceCamera = Camera.allCameras.FirstOrDefault (_cam => _cam.name == "Camera ScaledSpace");
 			farCamera = Camera.allCameras.FirstOrDefault (_cam => _cam.name == "Camera 01");
